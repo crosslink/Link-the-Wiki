@@ -5,7 +5,7 @@
 ifeq ($(strip $(DEBUG)),)
     BUILD = -O3
 else 
-    BUILD = -g3
+    BUILD = -g
 endif
 
 CFLAGS = $(BUILD)

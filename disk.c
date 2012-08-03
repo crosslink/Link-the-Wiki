@@ -155,3 +155,13 @@ if (**(current_line - 1) == '\0')
 return line_list;
 }
 
+/*
+	ANT_DISK::IS_DIRECTORY()
+	--------------------------
+*/
+bool ANT_disk::is_directory(char *filename) {
+	struct stat st;
+	if( stat(filename, &st) == 0)
+		return S_ISDIR(st.st_mode);
+	return 0;
+}
