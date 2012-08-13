@@ -45,6 +45,7 @@ long param, file_number, current_docid, source_docid = 0, target_docid;
 long lowercase_only, first_param, crosslink, append_source_title;
 long to_continue, language_link;
 long keep_anchor_intact;
+long valid_target_only;
 ANT_directory_iterator_object file_object;
 ANT_directory_iterator_object* file_object_tmp;
 
@@ -92,6 +93,11 @@ for (param = 1; param < argc; param++)
 		else if (strcmp(command, "keep-anchor-intact") == 0)
 			{
 			keep_anchor_intact = TRUE;
+			++first_param;
+			}
+		else if (strcmp(command, "valid-target-only") == 0)
+			{
+			valid_target_only = TRUE;
 			++first_param;
 			}
 		else
@@ -172,10 +178,11 @@ for (param = first_param; param < argc; param++)
 						if (!crosslink)
 							to_continue = TRUE;
 
-					if (!to_continue) {
+					if (!to_continue)
+						{
 						from = end;
 						continue;
-					}
+						}
 
 					buffer_start = strstr(buffer, "xlink:href=");
 					if (buffer_start != NULL/* && buffer_start < end*/)
@@ -196,6 +203,13 @@ for (param = first_param; param < argc; param++)
 						if (*target >= '0' && *target <= '9') // make sure this is a valid link
 							target_docid = atol(target);
 						}
+					else {
+						if (valid_target_only)
+							{
+							from = end;
+							continue;
+							}
+					}
 
 //					start = strchr(start, '>') + 1;
 					strncpy(anchor_text, anchor_start, end - anchor_start);
