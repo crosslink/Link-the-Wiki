@@ -63,8 +63,8 @@ for (param = 1; param < argc; param++)
 		current_docid = get_doc_id(file);
 		from = file;
 
-                if ((start = strstr(from, "<name")) != NULL) {
-                   if ((end = strstr(start, "</name>")) != NULL) {
+                if ((start = strstr(from, "<title")) != NULL) {
+                   if ((end = strstr(start, "</title>")) != NULL) {
                       start = strchr(start, '>') + 1;
                       strncpy(doc_title, start, end - start);
                       doc_title[end - start] = '\0';
