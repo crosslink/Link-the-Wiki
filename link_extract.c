@@ -57,7 +57,7 @@ lowercase_only = FALSE;
 language_link = FALSE;
 crosslink = FALSE;
 append_source_title = FALSE;
-keep_anchor_intact = FALSE;
+keep_anchor_intact = TRUE;
 char *command;
 const char *default_namespace = "en";
 const char *crosslink_namespace = default_namespace;
